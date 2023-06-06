@@ -1,20 +1,27 @@
 from BirdBrain import Finch
+import random
 
-myFinch = Finch('A')
-print("hello")
+bird = Finch()
 
-# for i in range(0,4):
-#     myFinch.setBeak(100, 100, 100)
-#myFinch.setMove('F', 30, 100)
-    # time.sleep(1)
-#myFinch.setTurn('R', 180, 100 )
-    # time.sleep(1)
-##myFinch.setMove ('F', 20, 100)
-#myFinch.setTurn('L', 180, 1E00)
-myFinch.setMove('F',100,30)
 while True:
-    print("how far away?: ", myFinch.getDistance())
-    time.sleep(1)
-    if myFinch.getDistance() < 10:
-        myFinch.setTurn('R',180,100)
-        myFinch.setMove('F', 100,100)
+    bird.setMotors(100, 100)
+    
+    distance = bird.getDistance()
+
+    if distance < 10:
+        bird.setMotors(0, 0)
+        bird.setBeak(255, 0, 0)
+        
+        turn_direction = random.choice(["left", "right"])
+        if turn_direction == "left":
+            bird.setTurn('L',270, 100)    
+        else:
+            bird.setTurn('R',90, 100)
+            
+        bird.setMotors(100, 100)
+        
+        bird.setBeak(0, 255, 0)  
+        bird.setMotors(0, 0)  
+        bird.playNote(50, 10) 
+        
+        bird.setBeak(0, 0, 0)  
